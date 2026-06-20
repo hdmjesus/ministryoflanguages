@@ -1,0 +1,53 @@
+---
+import { site } from "@/data/site"
+
+/**
+ * Placeholder brand emblem (circular gold badge).
+ * Swap for the real owl artwork by dropping a file in /public and
+ * replacing this SVG with an <img>. Uses theme tokens so it stays on-brand.
+ */
+interface Props {
+  class?: string
+}
+
+const { class: className = "h-11 w-11" } = Astro.props
+const title = site.logoAlt
+---
+
+<svg
+  class={className}
+  viewBox="0 0 100 100"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label={title}
+>
+  <circle cx="50" cy="50" r="48" fill="var(--color-accent)" />
+  <circle cx="50" cy="50" r="40" fill="var(--color-surface)" />
+  <circle
+    cx="50"
+    cy="50"
+    r="44"
+    fill="none"
+    stroke="var(--color-surface)"
+    stroke-width="1.5"
+  />
+  <!-- Open book -->
+  <path
+    d="M50 40c-6-4-14-4-20-2v26c6-2 14-2 20 2 6-4 14-4 20-2V38c-6-2-14-2-20 2z"
+    fill="none"
+    stroke="var(--color-accent)"
+    stroke-width="3"
+    stroke-linejoin="round"
+  />
+  <line x1="50" y1="40" x2="50" y2="66" stroke="var(--color-accent)" stroke-width="3" />
+  <!-- Initials -->
+  <text
+    x="50"
+    y="32"
+    text-anchor="middle"
+    font-family="Poppins, sans-serif"
+    font-size="16"
+    font-weight="700"
+    fill="var(--color-accent)"
+  >ML</text>
+</svg>

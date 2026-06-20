@@ -1,0 +1,33 @@
+---
+import { site, navLinks } from "@/data/site"
+import Container from "@/components/ui/Container.astro"
+import Logo from "@/components/ui/Logo.astro"
+---
+
+<header class="sticky top-0 z-50 border-b border-surface-border bg-surface text-surface-foreground">
+  <Container class="flex flex-col gap-3 py-3 md:flex-row md:items-center md:justify-between md:py-4">
+    <a href="#top" class="flex items-center gap-3">
+      <Logo class="h-11 w-11" />
+      <span class="font-heading text-base font-bold leading-tight tracking-tight md:text-lg">
+        {site.name}
+      </span>
+    </a>
+
+    <nav aria-label="Primary">
+      <ul class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-surface-foreground/85 transition-colors hover:text-surface-accent"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </Container>
+</header>

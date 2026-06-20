@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette: navy + gold + off-white (from the Italian A1 flyer) */
+  --color-background: oklch(0.985 0.005 250);
+  --color-foreground: oklch(0.24 0.07 264);
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.24 0.07 264);
+  --color-primary: oklch(0.27 0.08 264);
+  --color-primary-foreground: oklch(0.98 0.01 250);
+  --color-muted: oklch(0.95 0.01 250);
+  --color-muted-foreground: oklch(0.5 0.04 264);
+  --color-accent: oklch(0.78 0.15 78);
+  --color-accent-foreground: oklch(0.24 0.07 264);
+  --color-border: oklch(0.9 0.02 250);
+  --color-input: oklch(0.9 0.02 250);
+  --color-ring: oklch(0.78 0.15 78);
+
+  /* Navy "sidebar"/dark surface used for header, footer and info strip */
+  --color-surface: oklch(0.27 0.08 264);
+  --color-surface-foreground: oklch(0.98 0.01 250);
+  --color-surface-accent: oklch(0.78 0.15 78);
+  --color-surface-border: oklch(0.35 0.07 264);
+
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  --radius: 0.75rem;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    background-color: var(--color-background);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+}

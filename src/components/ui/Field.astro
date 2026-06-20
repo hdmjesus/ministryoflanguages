@@ -1,0 +1,64 @@
+---
+import { Icon } from "astro-icon/components"
+
+/**
+ * Labeled form control. Renders a <select> when `options` is provided,
+ * otherwise an <input>. Keeps all field styling in one place (DRY).
+ */
+interface Props {
+  label: string
+  name: string
+  type?: "text" | "email"
+  placeholder?: string
+  required?: boolean
+  options?: readonly string[]
+  selectPlaceholder?: string
+}
+
+const {
+  label,
+  name,
+  type = "text",
+  placeholder,
+  required = false,
+  options,
+  selectPlaceholder = "Choose one…",
+} = Astro.props
+
+const control =
+  "w-full rounded-lg border border-input bg-card px-4 py-3 text-sm text-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-none"
+---
+
+<div class="flex flex-col gap-2">
+  <label for={name} class="font-heading text-sm font-semibold text-foreground">
+    {label}
+  </label>
+
+  {
+    options ? (
+      <div class="relative">
+        <select id={name} name={name} required={required} class={`${control} appearance-none pr-10`}>
+          <option value="" disabled selected>
+            {selectPlaceholder}
+          </option>
+          {options.map((opt) => (
+            <option value={opt}>{opt}</option>
+          ))}
+        </select>
+        <Icon
+          name="lucide:chevron-down"
+          class="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground"
+        />
+      </div>
+    ) : (
+      <input
+        id={name}
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        required={required}
+        class={control}
+      />
+    )
+  }
+</div>

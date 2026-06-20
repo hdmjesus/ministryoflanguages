@@ -1,0 +1,18 @@
+---
+import { aboutBlocks } from "@/data/site"
+import Container from "@/components/ui/Container.astro"
+---
+
+<section class="border-y border-border bg-surface text-surface-foreground">
+  <Container class="grid gap-8 py-14 md:grid-cols-3 md:py-16">
+    {
+      aboutBlocks.map((block) => (
+        <article id={block.id} class="flex flex-col gap-3 scroll-mt-20">
+          <h2 class="font-heading text-lg font-bold text-surface-accent">{block.title}</h2>
+          <div class="h-0.5 w-12 rounded-full bg-surface-accent/70" aria-hidden="true" />
+          <p class="text-sm leading-relaxed text-surface-foreground/80">{block.text}</p>
+        </article>
+      ))
+    }
+  </Container>
+</section>

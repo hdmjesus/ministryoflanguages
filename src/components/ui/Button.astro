@@ -1,0 +1,35 @@
+---
+/**
+ * Polymorphic button: renders an <a> when `href` is set, otherwise a <button>.
+ * Keeps the gold "Register Now" / "Send" styling consistent (DRY).
+ */
+interface Props {
+  href?: string
+  type?: "submit" | "button" | "reset"
+  variant?: "accent"
+  class?: string
+}
+
+const { href, type = "button", variant = "accent", class: className = "" } = Astro.props
+
+const base =
+  "inline-flex items-center justify-center rounded-full px-7 py-3 font-heading text-sm font-bold shadow-sm transition-transform hover:scale-[1.03] focus-visible:scale-[1.03]"
+
+const variants: Record<NonNullable<Props["variant"]>, string> = {
+  accent: "bg-accent text-accent-foreground",
+}
+
+const classes = `${base} ${variants[variant]} ${className}`
+---
+
+{
+  href ? (
+    <a href={href} class={classes}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes}>
+      <slot />
+    </button>
+  )
+}
