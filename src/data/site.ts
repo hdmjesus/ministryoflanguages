@@ -7,8 +7,25 @@
 export const site = {
   name: "The Ministry of Languages",
   shortName: "Ministry of Languages",
-  tagline: "Learn. Practice. Grow.",
-  subtitle: "Learn English, French, Italian, Portuguese and more.",
+  tagline: "Live online language classes for adults.",
+  heroTitle: "Online English, French, Italian and Portuguese Classes",
+  subtitle:
+    "Learn with live online lessons, small groups, grammar guidance and real conversation practice for adult learners.",
+  seoTitle: "Online Language Classes | Learn English, French, Italian & Portuguese",
+  seoDescription:
+    "Join live online language classes for adults. Study English, French, Italian and Portuguese with small groups, clear grammar lessons, pronunciation support and real conversation practice.",
+  seoKeywords: [
+    "online language classes",
+    "learn english online",
+    "online english classes for adults",
+    "learn french online",
+    "learn italian online",
+    "learn portuguese online",
+    "live language lessons",
+    "small group language classes",
+    "conversation classes online",
+    "grammar and pronunciation classes",
+  ],
   logoAlt: "The Ministry of Languages emblem",
   email: "ministryoflanguages6@gmail.com",
   year: 2026,
@@ -47,17 +64,17 @@ export const aboutBlocks: InfoBlock[] = [
   {
     id: "about",
     title: "Who We Are",
-    text: "The Ministry of Languages helps adult learners improve their language skills with clear lessons, practice, and supportive teaching.",
+    text: "The Ministry of Languages helps adult learners build confidence in English, French, Italian and Portuguese through structured lessons, live practice and supportive teaching.",
   },
   {
     id: "where",
-    title: "Where",
-    text: "Classes are offered online through live sessions, making it easy for students to join from anywhere.",
+    title: "Online Learning",
+    text: "Classes are taught online in live sessions, making it easy for students to join from anywhere and practice consistently with a real teacher.",
   },
   {
     id: "hellotalk",
-    title: "About HelloTalk",
-    text: "Students can use HelloTalk as an extra tool to practice with native speakers and continue learning outside class.",
+    title: "Extra Speaking Practice",
+    text: "Students can use HelloTalk as an extra tool to connect with native speakers and keep improving their speaking and listening skills outside class.",
   },
 ]
 

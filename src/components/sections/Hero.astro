@@ -15,12 +15,17 @@ import Logo from "@/components/ui/Logo.astro"
 
       <div class="order-1 flex flex-col items-center text-center md:order-2">
         <Logo class="h-40 w-40 md:h-52 md:w-52" />
-        <h1
-          class="mt-6 text-balance font-heading text-3xl font-extrabold leading-tight text-primary md:text-4xl"
+        <p
+          class="mt-6 font-heading text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground"
         >
           {site.shortName}
+        </p>
+        <h1
+          class="mt-3 text-balance font-heading text-3xl font-extrabold leading-tight text-primary md:text-4xl"
+        >
+          {site.heroTitle}
         </h1>
-        <p class="mt-3 max-w-xs text-pretty leading-relaxed text-muted-foreground">
+        <p class="mt-3 max-w-md text-pretty leading-relaxed text-muted-foreground">
           {site.subtitle}
         </p>
         <Button href="#signin" class="mt-6">Register Now</Button>

@@ -1,14 +1,17 @@
 ---
 import "@/styles/global.css"
+import { site } from "@/data/site"
 
 interface Props {
   title?: string
   description?: string
+  keywords?: readonly string[]
 }
 
 const {
-  title = "The Ministry of Languages — Learn. Practice. Grow.",
-  description = "Online language classes designed for learners who want strong, confident skills. Live classes, small groups, practice focused.",
+  title = `${site.seoTitle} | ${site.shortName}`,
+  description = site.seoDescription,
+  keywords = site.seoKeywords,
 } = Astro.props
 ---
 
@@ -17,7 +20,16 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(", ")} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <meta name="theme-color" content="#162a5c" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
