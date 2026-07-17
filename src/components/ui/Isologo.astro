@@ -1,0 +1,12 @@
+---
+import { site } from "@/data/site";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = " w-fit" } = Astro.props;
+const title = site.logoAlt;
+---
+
+<img src="/isologo-blue.png" class={className} alt={title} />

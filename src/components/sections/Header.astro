@@ -1,20 +1,23 @@
 ---
-import { site, navLinks } from "@/data/site"
-import Container from "@/components/ui/Container.astro"
-import Logo from "@/components/ui/Logo.astro"
+import { site, navLinks } from "@/data/site";
+import Container from "@/components/ui/Container.astro";
+import Logo from "@/components/ui/Logo.astro";
 ---
 
-<header class="sticky top-0 z-50 border-b border-surface-border bg-surface text-surface-foreground">
-  <Container class="flex flex-col gap-3 py-3 md:flex-row md:items-center md:justify-between md:py-4">
+<header
+  class="sticky top-0 z-50 border-b border-surface-border bg-surface text-surface-foreground"
+>
+  <Container
+    class="flex flex-col gap-3 py-3 md:flex-row md:items-center md:justify-between md:py-4"
+  >
     <a href="#top" class="flex items-center gap-3">
-      <Logo class="h-11 w-11" />
-      <span class="font-heading text-base font-bold leading-tight tracking-tight md:text-lg">
-        {site.name}
-      </span>
+      <Logo class="h-16 w-fit md:h-25" />
     </a>
 
     <nav aria-label="Primary">
-      <ul class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium">
+      <ul
+        class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium"
+      >
         {
           navLinks.map((link) => (
             <li>

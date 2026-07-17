@@ -1,19 +1,17 @@
 ---
-import { site } from "@/data/site"
-import { Icon } from "astro-icon/components"
-import Container from "@/components/ui/Container.astro"
-import Logo from "@/components/ui/Logo.astro"
+import { site } from "@/data/site";
+import { Icon } from "astro-icon/components";
+import Container from "@/components/ui/Container.astro";
+import Logo from "@/components/ui/Logo.astro";
 ---
 
 <footer id="contact" class="bg-surface text-surface-foreground scroll-mt-20">
   <div class="border-t border-surface-border">
-    <Container class="flex flex-col gap-6 py-8 md:flex-row md:items-center md:justify-between">
+    <Container
+      class="flex flex-col gap-6 py-8 md:flex-row md:items-center md:justify-between"
+    >
       <a href="#top" class="flex items-center gap-3">
-        <Logo class="h-11 w-11" />
-        <span class="flex flex-col leading-tight">
-          <span class="font-heading text-base font-bold">{site.name}</span>
-          <span class="text-xs text-surface-foreground/70">{site.tagline}</span>
-        </span>
+        <Logo class="h-16 w-fit md:h-25" />
       </a>
 
       <a
@@ -29,7 +27,8 @@ import Logo from "@/components/ui/Logo.astro"
   <div class="border-t border-surface-border">
     <Container class="py-5">
       <p class="text-center text-xs text-surface-foreground/60">
-        © {site.year} The Ministry of Languages Domain. Lessons delivered online via HelloTalk.
+        © {site.year} The Ministry of Languages Domain. Lessons delivered online via
+        HelloTalk.
       </p>
     </Container>
   </div>
