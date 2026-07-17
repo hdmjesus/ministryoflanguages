@@ -1,9 +1,12 @@
 ---
-import { languages } from "@/data/site"
+import { useTranslations } from "@/i18n"
 import Container from "@/components/ui/Container.astro"
 import Card from "@/components/ui/Card.astro"
 import Field from "@/components/ui/Field.astro"
 import Button from "@/components/ui/Button.astro"
+
+const t = useTranslations(Astro.currentLocale)
+const s = t.signin
 
 const emailJsPublicKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY ?? ""
 const emailJsServiceId = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID ?? ""
@@ -14,26 +17,25 @@ const emailJsTemplateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID ?? ""
   <Container class="grid items-center gap-10 py-16 md:grid-cols-2 md:py-20 lg:gap-16">
     <div>
       <p class="font-heading text-xs font-bold uppercase tracking-[0.25em] text-surface-accent">
-        Sign-In
+        {s.eyebrow}
       </p>
 
       <h2 class="mt-4 text-balance font-heading text-3xl font-extrabold leading-tight md:text-4xl">
-        Reserve your seat<br class="hidden sm:block" /> in the next group
+        {s.title}
       </h2>
 
       <p class="mt-5 max-w-md text-pretty leading-relaxed text-surface-foreground/80">
-        Tell us which language you want to learn and we'll send you the schedule and joining details
-        for the live online classes.
+        {s.description}
       </p>
     </div>
 
     <Card class="p-6 md:p-8">
   <form id="signin-form" class="flex flex-col gap-5">
-    <Field label="Full name" name="name" placeholder="Your name" required />
-    <Field label="Email" name="email" type="email" placeholder="you@example.com" required />
-    <Field label="Select a language" name="language" options={languages} required />
+    <Field label={s.fullName} name="name" placeholder={s.namePlaceholder} required />
+    <Field label={s.email} name="email" type="email" placeholder="you@example.com" required />
+    <Field label={s.selectLanguage} name="language" options={t.languageNames} selectPlaceholder={s.selectLanguage} required />
 
-    <Button type="submit" class="mt-1 w-full">Send</Button>
+    <Button type="submit" class="mt-1 w-full">{s.send}</Button>
 
     <p
       id="signin-status"
@@ -49,12 +51,8 @@ const emailJsTemplateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID ?? ""
   is:inline
   src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
 ></script>
-<script
-  is:inline
-  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
-></script>
 
-<script is:inline define:vars={{ emailJsPublicKey, emailJsServiceId, emailJsTemplateId }}>
+<script is:inline define:vars={{ emailJsPublicKey, emailJsServiceId, emailJsTemplateId, msg: { sending: s.sending, sent: s.sent, error: s.error } }}>
   window.addEventListener("load", () => {
     const form = document.getElementById("signin-form")
     const status = document.getElementById("signin-status")
@@ -80,7 +78,7 @@ const emailJsTemplateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID ?? ""
     form.addEventListener("submit", async (event) => {
       event.preventDefault()
 
-      status.textContent = "Sending..."
+      status.textContent = msg.sending
 
       try {
         const result = await window.emailjs.sendForm(
@@ -91,11 +89,11 @@ const emailJsTemplateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID ?? ""
 
         console.log("EmailJS success:", result)
         form.reset()
-        status.textContent = "Sent successfully."
+        status.textContent = msg.sent
         status.className = "min-h-5 text-sm text-green-700"
       } catch (error) {
         console.error("EmailJS error:", error)
-        status.textContent = error?.text || error?.message || "Error sending email."
+        status.textContent = error?.text || error?.message || msg.error
         status.className = "min-h-5 text-sm text-red-600"
       }
     })

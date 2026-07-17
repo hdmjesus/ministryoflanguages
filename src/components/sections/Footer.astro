@@ -1,8 +1,11 @@
 ---
 import { site } from "@/data/site";
+import { useTranslations } from "@/i18n";
 import { Icon } from "astro-icon/components";
 import Container from "@/components/ui/Container.astro";
 import Logo from "@/components/ui/Logo.astro";
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <footer id="contact" class="bg-surface text-surface-foreground scroll-mt-20">
@@ -27,8 +30,7 @@ import Logo from "@/components/ui/Logo.astro";
   <div class="border-t border-surface-border">
     <Container class="py-5">
       <p class="text-center text-xs text-surface-foreground/60">
-        © {site.year} The Ministry of Languages Domain. Lessons delivered online via
-        HelloTalk.
+        {t.footer.replace("{year}", String(site.year))}
       </p>
     </Container>
   </div>

@@ -1,6 +1,10 @@
 ---
-import { aboutBlocks } from "@/data/site"
+import { aboutIds } from "@/data/site"
+import { useTranslations } from "@/i18n"
 import Container from "@/components/ui/Container.astro"
+
+const t = useTranslations(Astro.currentLocale)
+const aboutBlocks = t.about.map((block, i) => ({ id: aboutIds[i], ...block }))
 ---
 
 <section class="border-y border-border bg-surface text-surface-foreground">

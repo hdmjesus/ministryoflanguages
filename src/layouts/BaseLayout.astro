@@ -1,6 +1,7 @@
 ---
 import "@/styles/global.css"
 import { site } from "@/data/site"
+import { useTranslations, toLocale } from "@/i18n"
 
 interface Props {
   title?: string
@@ -8,15 +9,18 @@ interface Props {
   keywords?: readonly string[]
 }
 
+const lang = toLocale(Astro.currentLocale)
+const t = useTranslations(lang)
+
 const {
-  title = `${site.seoTitle} | ${site.shortName}`,
-  description = site.seoDescription,
+  title = `${t.seoTitle} | ${site.shortName}`,
+  description = t.seoDescription,
   keywords = site.seoKeywords,
 } = Astro.props
 ---
 
 <!doctype html>
-<html lang="en" class="bg-background">
+<html lang={lang} class="bg-background">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

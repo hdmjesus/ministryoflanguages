@@ -1,10 +1,14 @@
 ---
-import { site, leftInfo, rightInfo } from "@/data/site";
+import { leftIcons, rightIcons } from "@/data/site";
+import { useTranslations } from "@/i18n";
 import Container from "@/components/ui/Container.astro";
 import InfoColumn from "@/components/sections/InfoColumn.astro";
 import Button from "@/components/ui/Button.astro";
-import Logo from "@/components/ui/Logo.astro";
 import Isologo from "../ui/Isologo.astro";
+
+const t = useTranslations(Astro.currentLocale);
+const leftInfo = t.leftInfo.map((item, i) => ({ icon: leftIcons[i], ...item }));
+const rightInfo = t.rightInfo.map((item, i) => ({ icon: rightIcons[i], ...item }));
 ---
 
 <section id="top" class="bg-background">
@@ -13,7 +17,7 @@ import Isologo from "../ui/Isologo.astro";
       class="grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_minmax(300px,380px)_minmax(0,1fr)] md:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(340px,430px)_minmax(0,1fr)]"
     >
       <div class="order-2 md:order-1">
-        <InfoColumn heading="Info" items={leftInfo} />
+        <InfoColumn heading={t.infoHeading} items={leftInfo} />
       </div>
 
       <div
@@ -23,23 +27,23 @@ import Isologo from "../ui/Isologo.astro";
         <h1
           class="mt-3 text-balance font-heading text-3xl font-extrabold leading-tight text-primary md:text-[2rem] lg:text-4xl"
         >
-          {site.heroTitle}
+          {t.heroTitle}
         </h1>
         <p
           class="mt-3 max-w-sm text-pretty leading-relaxed text-muted-foreground"
         >
-          {site.subtitle}
+          {t.subtitle}
         </p>
-        <Button href="#signin" class="mt-6">Register Now</Button>
+        <Button href="#signin" class="mt-6">{t.registerNow}</Button>
         <p
           class="mt-4 font-heading text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground"
         >
-          {site.tagline}
+          {t.tagline}
         </p>
       </div>
 
       <div class="order-3">
-        <InfoColumn heading="Info" items={rightInfo} />
+        <InfoColumn heading={t.infoHeading} items={rightInfo} />
       </div>
     </div>
   </Container>

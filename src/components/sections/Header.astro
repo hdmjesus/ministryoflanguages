@@ -1,36 +1,81 @@
 ---
-import { site, navLinks } from "@/data/site";
+import { navItems } from "@/data/site";
+import {
+  useTranslations,
+  toLocale,
+  locales,
+  localePath,
+  localeFlags,
+  content,
+} from "@/i18n";
 import Container from "@/components/ui/Container.astro";
 import Logo from "@/components/ui/Logo.astro";
+
+const lang = toLocale(Astro.currentLocale);
+const t = useTranslations(lang);
 ---
 
 <header
   class="sticky top-0 z-50 border-b border-surface-border bg-surface text-surface-foreground"
 >
   <Container
-    class="flex flex-col gap-3 py-3 md:flex-row md:items-center md:justify-between md:py-4"
+    class="flex flex-col gap-3 py-3 md:flex-row md:items-center md:justify-between"
   >
     <a href="#top" class="flex items-center gap-3">
-      <Logo class="h-16 w-fit md:h-25" />
+      <Logo class="h-16 w-fit md:h-22.5" />
     </a>
 
-    <nav aria-label="Primary">
-      <ul
-        class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium"
-      >
-        {
-          navLinks.map((link) => (
-            <li>
-              <a
-                href={link.href}
-                class="text-surface-foreground/85 transition-colors hover:text-surface-accent"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
+    <div class="flex flex-col gap-3 md:flex-row md:items-center md:gap-6">
+      <nav aria-label="Primary">
+        <ul
+          class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium"
+        >
+          {
+            navItems.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-surface-foreground/85 transition-colors hover:text-surface-accent"
+                >
+                  {t.nav[link.key]}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="relative">
+        <label for="lang-select" class="sr-only">Language</label>
+        <select
+          id="lang-select"
+          class="cursor-pointer appearance-none rounded-lg border border-surface-border bg-surface py-2 pl-3 pr-9 text-sm font-medium text-surface-foreground transition-colors hover:border-surface-accent focus-visible:border-surface-accent focus-visible:outline-none"
+        >
+          {
+            locales.map((loc) => (
+              <option value={localePath(loc)} selected={loc === lang}>
+                {localeFlags[loc]} {content[loc].localeLabel}
+              </option>
+            ))
+          }
+        </select>
+        <svg
+          class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-foreground/60"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+
+      <script is:inline>
+        document.getElementById("lang-select")?.addEventListener("change", (e) => {
+          window.location.href = e.target.value
+        })
+      </script>
+    </div>
   </Container>
 </header>
