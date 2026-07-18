@@ -1,0 +1,534 @@
+---
+// PricingEnglish.astro
+// Sección de precios — English A1 (Ministry of Languages)
+// Componente autónomo con estilos "scoped". Se puede usar en cualquier proyecto Astro:
+//   import PricingEnglish from "../components/PricingEnglish.astro";
+//   <PricingEnglish />
+
+interface Feature {
+  label: string;
+  included: boolean;
+}
+
+interface Plan {
+  name: string;
+  price: number;
+  cadence: string;
+  tagline: string;
+  hoursLabel: string;
+  perHour: string;
+  featured?: boolean;
+  features: Feature[];
+}
+
+const plans: Plan[] = [
+  {
+    name: "Básico",
+    price: 120,
+    cadence: "/mes",
+    tagline: "Estructura, práctica constante y seguimiento.",
+    hoursLabel: "8 horas al mes",
+    perHour: "≈ $15 / hora",
+    features: [
+      { label: "8 horas de clases grupales", included: true },
+      { label: "Tarea semanal y retroalimentación", included: true },
+      { label: "Materiales adicionales (PDFs, vocabulario)", included: true },
+      { label: "Reporte y evaluación mensual", included: true },
+      { label: "Tutoría privada", included: false },
+      { label: "Inglés Temático", included: false },
+      { label: "Libros incluidos", included: false },
+    ],
+  },
+  {
+    name: "Medio",
+    price: 200,
+    cadence: "/mes",
+    tagline: "8 h grupales + 4 h de tutoría privada.",
+    hoursLabel: "12 horas al mes",
+    perHour: "≈ $16.67 / hora",
+    featured: true,
+    features: [
+      { label: "8 horas de clases grupales", included: true },
+      { label: "4 horas de tutoría privada", included: true },
+      { label: "Recuperación de clase perdida", included: true },
+      { label: "Tarea semanal y retroalimentación", included: true },
+      { label: "Reporte y evaluación mensual", included: true },
+      { label: "Inglés Temático", included: false },
+      { label: "Libros incluidos", included: false },
+    ],
+  },
+  {
+    name: "Premium",
+    price: 300,
+    cadence: "/mes",
+    tagline: "5 h tutoría + libros + Inglés Temático.",
+    hoursLabel: "13 horas al mes",
+    perHour: "El más completo",
+    features: [
+      { label: "8 horas de clases grupales", included: true },
+      { label: "5 horas de tutoría privada", included: true },
+      { label: "Clases privadas de refuerzo", included: true },
+      { label: "Student's Book y Workbook incluidos", included: true },
+      { label: "Inglés Temático mensual incluido", included: true },
+      { label: "Recuperación de clases perdidas", included: true },
+      { label: "Reporte y evaluación mensual", included: true },
+    ],
+  },
+];
+
+const otherLanguages = ["Francés", "Italiano", "Portugués"];
+---
+
+<section class="pricing" aria-labelledby="pricing-title">
+  <div class="pricing__inner">
+    <header class="pricing__head">
+      <span class="pricing__eyebrow">Programas Mensuales</span>
+      <h2 id="pricing-title">English A1</h2>
+      <p class="pricing__sub">
+        Clases grupales, práctica oral, pronunciación, tareas y seguimiento
+        mensual. Elige el paquete que mejor se adapte a tu ritmo.
+      </p>
+    </header>
+
+    <div class="pricing__grid" role="list">
+      {
+        plans.map((plan) => (
+          <article
+            class:list={["card", { "card--featured": plan.featured }]}
+            role="listitem"
+          >
+            {plan.featured && <span class="card__ribbon">Más popular</span>}
+
+            <div class="card__top">
+              <h3 class="card__name">{plan.name}</h3>
+              <p class="card__tagline">{plan.tagline}</p>
+            </div>
+
+            <div class="card__price">
+              <span class="card__currency">$</span>
+              <span class="card__amount">{plan.price}</span>
+              <span class="card__cadence">{plan.cadence}</span>
+            </div>
+
+            <div class="card__meta">
+              <span class="card__hours">{plan.hoursLabel}</span>
+              <span class="card__dot" aria-hidden="true">•</span>
+              <span class="card__perhour">{plan.perHour}</span>
+            </div>
+
+            <a class="card__cta" href="#inscripcion">
+              Inscribirme
+            </a>
+
+            <ul class="card__features">
+              {plan.features.map((feature) => (
+                <li class:list={["feat", { "feat--off": !feature.included }]}>
+                  <span class="feat__icon" aria-hidden="true">
+                    {feature.included ? (
+                      <svg viewBox="0 0 20 20" fill="none">
+                        <path
+                          d="M4 10.5l4 4 8-9"
+                          stroke="currentColor"
+                          stroke-width="2.2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    ) : (
+                      <svg viewBox="0 0 20 20" fill="none">
+                        <path
+                          d="M5 5l10 10M15 5L5 15"
+                          stroke="currentColor"
+                          stroke-width="2.2"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                    )}
+                  </span>
+                  <span>{feature.label}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="soon">
+      <div class="soon__text">
+        <span class="soon__badge">Próximamente</span>
+        <p>
+          Los programas de <strong>{otherLanguages.join(", ")}</strong> estarán
+          disponibles muy pronto. Estamos afinando los precios y detalles.
+        </p>
+      </div>
+      <a class="soon__cta" href="#notificarme">Avísame cuando salgan</a>
+    </div>
+
+    <p class="referral">
+      <strong>Bono por referidos:</strong> trae 2 estudiantes nuevos con tu mismo
+      paquete y recibe 1 mes gratis.
+    </p>
+  </div>
+</section>
+
+<style>
+  .pricing {
+    --navy: #0a1c44;
+    --navy-soft: #13244f;
+    --gold: #e8a317;
+    --bg: #f5f8fc;
+    --card: #ffffff;
+    --border: #e2e8f4;
+    --muted: #5b6b8c;
+
+    background: var(--bg);
+    color: var(--navy);
+    padding: 5rem 1.25rem;
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .pricing__inner {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .pricing__head {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto 3rem;
+  }
+
+  .pricing__eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .pricing__head h2 {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 0.9rem;
+    text-wrap: balance;
+  }
+
+  .pricing__sub {
+    color: var(--muted);
+    font-size: 1.02rem;
+    line-height: 1.6;
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  .pricing__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 860px) {
+    .pricing__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px -18px rgba(10, 28, 68, 0.25);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 48px -24px rgba(10, 28, 68, 0.4);
+    border-color: #cdd8ee;
+  }
+
+  .card--featured {
+    background: var(--navy);
+    color: #fff;
+    border-color: var(--navy);
+    box-shadow: 0 26px 60px -22px rgba(10, 28, 68, 0.6);
+  }
+
+  @media (min-width: 860px) {
+    .card--featured {
+      transform: scale(1.04);
+    }
+    .card--featured:hover {
+      transform: scale(1.04) translateY(-6px);
+    }
+  }
+
+  .card__ribbon {
+    position: absolute;
+    top: -0.85rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .card__name {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+  }
+
+  .card__tagline {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 0;
+    min-height: 2.7em;
+  }
+
+  .card--featured .card__tagline {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .card__price {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.15rem;
+    margin: 1.4rem 0 0.5rem;
+  }
+
+  .card__currency {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    color: var(--gold);
+  }
+
+  .card__amount {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: 3.2rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .card__cadence {
+    align-self: flex-end;
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 0.55rem;
+  }
+
+  .card--featured .card__cadence {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .card__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1.4rem;
+  }
+
+  .card--featured .card__meta {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .card__dot {
+    color: var(--gold);
+  }
+
+  .card__cta {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.98rem;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    background: var(--navy);
+    color: #fff;
+    border: 2px solid var(--navy);
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      transform 0.15s ease;
+  }
+
+  .card__cta:hover {
+    transform: translateY(-2px);
+  }
+
+  .card--featured .card__cta {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy);
+  }
+
+  .card__features {
+    list-style: none;
+    margin: 1.6rem 0 0;
+    padding: 1.6rem 0 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .card--featured .card__features {
+    border-top-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .feat {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
+
+  .feat__icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #14804a;
+    background: rgba(20, 128, 74, 0.12);
+  }
+
+  .feat__icon svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .card--featured .feat__icon {
+    color: #7be0ac;
+    background: rgba(123, 224, 172, 0.16);
+  }
+
+  .feat--off {
+    color: var(--muted);
+  }
+
+  .feat--off .feat__icon {
+    color: #b23b3b;
+    background: rgba(178, 59, 59, 0.1);
+  }
+
+  .card--featured .feat--off {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .card--featured .feat--off .feat__icon {
+    color: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Próximamente */
+  .soon {
+    margin-top: 2.5rem;
+    background: var(--navy);
+    color: #fff;
+    border-radius: 20px;
+    padding: 1.75rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: flex-start;
+    background-image: radial-gradient(
+      circle at 100% 0%,
+      rgba(232, 163, 23, 0.18),
+      transparent 45%
+    );
+  }
+
+  @media (min-width: 720px) {
+    .soon {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .soon__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .soon__badge {
+    align-self: flex-start;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+  }
+
+  .soon__text p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 60ch;
+  }
+
+  .soon__text strong {
+    color: #fff;
+  }
+
+  .soon__cta {
+    flex-shrink: 0;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--navy);
+    background: #fff;
+    padding: 0.8rem 1.3rem;
+    border-radius: 12px;
+    transition: transform 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .soon__cta:hover {
+    transform: translateY(-2px);
+  }
+
+  .referral {
+    text-align: center;
+    margin: 2rem 0 0;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  .referral strong {
+    color: var(--navy);
+  }
+</style>

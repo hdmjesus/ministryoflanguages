@@ -1,0 +1,81 @@
+---
+// Por Qué Elegirnos — pilares de la metodología
+import { useTranslations } from "@/i18n";
+
+const { why } = useTranslations(Astro.currentLocale).aboutPage;
+---
+
+<div class="block">
+  <div class="block__head">
+    <span class="kicker">{why.kicker}</span>
+    <h2 class="block__title">{why.title}</h2>
+    <p class="block__sub">{why.sub}</p>
+  </div>
+  <div class="pillars">
+    {
+      why.pillars.map((p) => (
+        <div class="pillar">
+          <div class="pillar__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <div>
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .pillar {
+    display: flex;
+    gap: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .pillar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px -28px rgba(10, 28, 68, 0.5);
+  }
+
+  .pillar__mark {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(232, 163, 23, 0.14);
+    color: var(--gold);
+    display: grid;
+    place-items: center;
+  }
+
+  .pillar h3 {
+    font-size: 1.06rem;
+    margin-bottom: 6px;
+  }
+
+  .pillar p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  @media (min-width: 720px) {
+    .pillars {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

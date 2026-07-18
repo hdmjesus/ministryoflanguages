@@ -1,0 +1,67 @@
+---
+// Quiénes Somos + Nuestra Misión
+import { useTranslations } from "@/i18n";
+
+const { intro } = useTranslations(Astro.currentLocale).aboutPage;
+---
+
+<div class="intro-grid">
+  <article class="prose-card">
+    <span class="kicker">{intro.whoKicker}</span>
+    <h2>{intro.whoTitle}</h2>
+    {intro.whoText.map((p) => <p>{p}</p>)}
+  </article>
+  <article class="prose-card prose-card--accent">
+    <span class="kicker">{intro.missionKicker}</span>
+    <h2>{intro.missionTitle}</h2>
+    {intro.missionText.map((p) => <p>{p}</p>)}
+  </article>
+</div>
+
+<style>
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: -48px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .prose-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 34px;
+    box-shadow: 0 24px 50px -30px rgba(10, 28, 68, 0.4);
+  }
+
+  .prose-card h2 {
+    font-size: 1.4rem;
+    margin: 8px 0 14px;
+  }
+
+  .prose-card--accent {
+    background: linear-gradient(180deg, #0a1c44, #12285c);
+  }
+
+  .prose-card--accent h2 {
+    color: #ffffff;
+  }
+
+  .prose-card--accent p {
+    color: #c6d2ea;
+  }
+
+  @media (min-width: 720px) {
+    .intro-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .prose-card {
+      padding: 28px 22px;
+    }
+  }
+</style>

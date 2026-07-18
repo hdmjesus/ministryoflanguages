@@ -1,0 +1,68 @@
+---
+// Nuestros Programas
+import { useTranslations } from "@/i18n";
+
+const { programs } = useTranslations(Astro.currentLocale).aboutPage;
+---
+
+<div class="programs">
+  <div class="programs__head">
+    <span class="kicker kicker--light">{programs.kicker}</span>
+    <h2>{programs.title}</h2>
+    <p>{programs.text}</p>
+  </div>
+  <ul class="programs__list">
+    {programs.list.map((p) => <li>{p}</li>)}
+  </ul>
+</div>
+
+<style>
+  .programs {
+    margin-top: 84px;
+    background: linear-gradient(135deg, #0a1c44, #12285c);
+    border-radius: 24px;
+    padding: 48px;
+    text-align: center;
+  }
+
+  .programs__head {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .programs h2 {
+    color: #ffffff;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: 12px;
+  }
+
+  .programs p {
+    color: #c6d2ea;
+  }
+
+  .programs__list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px 0 0;
+    padding: 0;
+  }
+
+  .programs__list li {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--navy);
+    background: var(--gold-soft);
+    border-radius: 999px;
+    padding: 10px 22px;
+  }
+
+  @media (max-width: 520px) {
+    .programs {
+      padding: 28px 22px;
+    }
+  }
+</style>

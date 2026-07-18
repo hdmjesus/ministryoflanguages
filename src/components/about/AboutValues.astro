@@ -1,0 +1,91 @@
+---
+// Nuestros Valores
+import { useTranslations } from "@/i18n";
+
+const { values } = useTranslations(Astro.currentLocale).aboutPage;
+// Iconos: estructurales, en el mismo orden que values.items
+const icons = ["star", "heart", "chat", "globe", "book"];
+---
+
+<div class="block">
+  <div class="block__head">
+    <span class="kicker">{values.kicker}</span>
+    <h2 class="block__title">{values.title}</h2>
+  </div>
+  <div class="values">
+    {
+      values.items.map((v, i) => (
+        <article class="value">
+          <span class="value__icon" aria-hidden="true">
+            {icons[i] === "star" && (
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+            )}
+            {icons[i] === "heart" && (
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
+            )}
+            {icons[i] === "chat" && (
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
+            )}
+            {icons[i] === "globe" && (
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>
+            )}
+            {icons[i] === "book" && (
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>
+            )}
+          </span>
+          <h3>{v.title}</h3>
+          <p>{v.desc}</p>
+        </article>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .values {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .value {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .value:hover {
+    transform: translateY(-4px);
+    border-color: rgba(232, 163, 23, 0.5);
+    box-shadow: 0 22px 44px -30px rgba(10, 28, 68, 0.5);
+  }
+
+  .value__icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--navy);
+    color: var(--gold-soft);
+    margin-bottom: 16px;
+  }
+
+  .value h3 {
+    font-size: 1.12rem;
+    margin-bottom: 8px;
+  }
+
+  .value p {
+    margin: 0;
+    font-size: 0.94rem;
+  }
+
+  @media (min-width: 720px) {
+    .values {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

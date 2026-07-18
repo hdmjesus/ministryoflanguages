@@ -1,0 +1,31 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import AboutHero from "./about/AboutHero.astro";
+import AboutIntro from "./about/AboutIntro.astro";
+import AboutWhyUs from "./about/AboutWhyUs.astro";
+import AboutInstructor from "./about/AboutInstructor.astro";
+import AboutValues from "./about/AboutValues.astro";
+import AboutPrograms from "./about/AboutPrograms.astro";
+import AboutPromise from "./about/AboutPromise.astro";
+import "./about/about.css";
+import Header from "./sections/Header.astro";
+import { useTranslations } from "@/i18n";
+
+// about.astro — Página "Sobre Nosotros" (The Ministry of Languages)
+const { aboutPage } = useTranslations(Astro.currentLocale);
+---
+
+<BaseLayout title={aboutPage.seoTitle} description={aboutPage.seoDescription}>
+  <section class="about">
+    <Header />
+    <AboutHero />
+    <div class="container">
+      <AboutIntro />
+      <AboutWhyUs />
+      <AboutInstructor />
+      <AboutValues />
+      <AboutPrograms />
+      <AboutPromise />
+    </div>
+  </section>
+</BaseLayout>

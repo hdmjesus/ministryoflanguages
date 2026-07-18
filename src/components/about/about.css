@@ -1,0 +1,114 @@
+/* Shared design tokens + primitives for the About page.
+   Selectors are prefixed with `.about` so nothing leaks globally.
+   Tokens declared here cascade into every child section component
+   (CSS custom properties inherit through the DOM). */
+
+.about {
+  --navy: #0a1c44;
+  --navy-soft: #12285c;
+  --gold: #e8a317;
+  --gold-soft: #f6c453;
+  --bg: #f5f8fc;
+  --card: #ffffff;
+  --border: #e2e8f4;
+  --text: #0a1c44;
+  --muted: #5b6b8c;
+
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+
+.about .container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.about .eyebrow,
+.about .kicker {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.about .kicker {
+  margin-bottom: 12px;
+}
+
+.about .kicker--light {
+  color: var(--gold-soft);
+}
+
+.about :is(h1, h2, h3) {
+  font-family: "Poppins", "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.about p {
+  margin: 0 0 14px;
+  color: var(--muted);
+}
+
+/* Buttons (used by the promise/CTA) */
+.about .btn {
+  display: inline-block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.about .btn--primary {
+  background: var(--gold);
+  color: var(--navy);
+  box-shadow: 0 14px 30px -14px rgba(232, 163, 23, 0.8);
+}
+
+.about .btn--primary:hover {
+  transform: translateY(-2px);
+  background: var(--gold-soft);
+}
+
+.about .btn--ghost {
+  background: transparent;
+  color: var(--navy);
+  border: 1.5px solid var(--border);
+}
+
+.about .btn--ghost:hover {
+  border-color: var(--navy);
+  transform: translateY(-2px);
+}
+
+/* Generic centered section head (shared by why-us + values) */
+.about .block {
+  margin-top: 84px;
+}
+
+.about .block__head {
+  max-width: 720px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.about .block__title {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+}
+
+.about .block__sub {
+  margin-top: 14px;
+}

@@ -1,49 +1,75 @@
 ---
-import { useTranslations } from "@/i18n"
-import Container from "@/components/ui/Container.astro"
-import Card from "@/components/ui/Card.astro"
-import Field from "@/components/ui/Field.astro"
-import Button from "@/components/ui/Button.astro"
+import { useTranslations } from "@/i18n";
+import Container from "@/components/ui/Container.astro";
+import Card from "@/components/ui/Card.astro";
+import Field from "@/components/ui/Field.astro";
+import Button from "@/components/ui/Button.astro";
 
-const t = useTranslations(Astro.currentLocale)
-const s = t.signin
+const t = useTranslations(Astro.currentLocale);
+const s = t.signin;
 
-const emailJsPublicKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY ?? ""
-const emailJsServiceId = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID ?? ""
-const emailJsTemplateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID ?? ""
+const emailJsPublicKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY ?? "";
+const emailJsServiceId = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID ?? "";
+const emailJsTemplateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID ?? "";
 ---
 
 <section id="signin" class="bg-surface text-surface-foreground scroll-mt-20">
-  <Container class="grid items-center gap-10 py-16 md:grid-cols-2 md:py-20 lg:gap-16">
+  <Container
+    class="grid items-center gap-10 py-16 md:grid-cols-2 md:py-20 lg:gap-16"
+  >
     <div>
-      <p class="font-heading text-xs font-bold uppercase tracking-[0.25em] text-surface-accent">
+      <p
+        class="font-heading text-xs font-bold uppercase tracking-[0.25em] text-surface-accent"
+      >
         {s.eyebrow}
       </p>
 
-      <h2 class="mt-4 text-balance font-heading text-3xl font-extrabold leading-tight md:text-4xl">
+      <h2
+        class="mt-4 text-balance font-heading text-3xl font-extrabold leading-tight md:text-4xl"
+      >
         {s.title}
       </h2>
 
-      <p class="mt-5 max-w-md text-pretty leading-relaxed text-surface-foreground/80">
+      <p
+        class="mt-5 max-w-md text-pretty leading-relaxed text-surface-foreground/80"
+      >
         {s.description}
       </p>
     </div>
 
     <Card class="p-6 md:p-8">
-  <form id="signin-form" class="flex flex-col gap-5">
-    <Field label={s.fullName} name="name" placeholder={s.namePlaceholder} required />
-    <Field label={s.email} name="email" type="email" placeholder="you@example.com" required />
-    <Field label={s.selectLanguage} name="language" options={t.languageNames} selectPlaceholder={s.selectLanguage} required />
+      <form id="signin-form" class="flex flex-col gap-5">
+        <Field
+          label={s.fullName}
+          name="name"
+          placeholder={s.namePlaceholder}
+          required
+        />
+        <Field
+          label={s.email}
+          name="email"
+          type="email"
+          placeholder="you@example.com"
+          required
+        />
+        <Field
+          label={s.selectLanguage}
+          name="language"
+          options={t.languageNames}
+          selectPlaceholder={s.selectLanguage}
+          required
+        />
 
-    <Button type="submit" class="mt-1 w-full">{s.send}</Button>
+        <Button type="submit" class="mt-1 w-full">{s.send}</Button>
 
-    <p
-      id="signin-status"
-      class="min-h-5 text-sm text-surface-foreground/70"
-      aria-live="polite"
-    ></p>
-  </form>
-</Card>
+        <p
+          id="signin-status"
+          class="min-h-5 text-sm text-surface-foreground/70"
+          aria-live="polite"
+        >
+        </p>
+      </form>
+    </Card>
   </Container>
 </section>
 
@@ -52,10 +78,18 @@ const emailJsTemplateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID ?? ""
   src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
 ></script>
 
-<script is:inline define:vars={{ emailJsPublicKey, emailJsServiceId, emailJsTemplateId, msg: { sending: s.sending, sent: s.sent, error: s.error } }}>
+<script
+  is:inline
+  define:vars={{
+    emailJsPublicKey,
+    emailJsServiceId,
+    emailJsTemplateId,
+    msg: { sending: s.sending, sent: s.sent, error: s.error },
+  }}
+>
   window.addEventListener("load", () => {
-    const form = document.getElementById("signin-form")
-    const status = document.getElementById("signin-status")
+    const form = document.getElementById("signin-form");
+    const status = document.getElementById("signin-status");
 
     console.log({
       form,
@@ -64,38 +98,38 @@ const emailJsTemplateId = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID ?? ""
       emailJsPublicKey,
       emailJsServiceId,
       emailJsTemplateId,
-    })
+    });
 
     if (!(form instanceof HTMLFormElement)) {
-      console.error("signin-form is not a real form")
-      return
+      console.error("signin-form is not a real form");
+      return;
     }
 
     window.emailjs.init({
       publicKey: emailJsPublicKey,
-    })
+    });
 
     form.addEventListener("submit", async (event) => {
-      event.preventDefault()
+      event.preventDefault();
 
-      status.textContent = msg.sending
+      status.textContent = msg.sending;
 
       try {
         const result = await window.emailjs.sendForm(
           emailJsServiceId,
           emailJsTemplateId,
-          form
-        )
+          form,
+        );
 
-        console.log("EmailJS success:", result)
-        form.reset()
-        status.textContent = msg.sent
-        status.className = "min-h-5 text-sm text-green-700"
+        console.log("EmailJS success:", result);
+        form.reset();
+        status.textContent = msg.sent;
+        status.className = "min-h-5 text-sm text-green-700";
       } catch (error) {
-        console.error("EmailJS error:", error)
-        status.textContent = error?.text || error?.message || msg.error
-        status.className = "min-h-5 text-sm text-red-600"
+        console.error("EmailJS error:", error);
+        status.textContent = error?.text || error?.message || msg.error;
+        status.className = "min-h-5 text-sm text-red-600";
       }
-    })
-  })
+    });
+  });
 </script>

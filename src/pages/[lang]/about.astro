@@ -1,0 +1,11 @@
+---
+import { locales, defaultLocale } from "@/i18n"
+import About from "@/components/About.astro"
+export function getStaticPaths() {
+  return locales
+    .filter((lang) => lang !== defaultLocale)
+    .map((lang) => ({ params: { lang } }))
+}
+---
+
+<About />

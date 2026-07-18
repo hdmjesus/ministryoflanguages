@@ -1,0 +1,148 @@
+---
+// Conoce a tu Instructor — Jeffrey A. Guzman
+import { useTranslations } from "@/i18n";
+
+const { instructor } = useTranslations(Astro.currentLocale).aboutPage;
+---
+
+<div class="instructor">
+  <div class="instructor__media">
+    <!-- Espacio reservado para la foto del profesor.
+         Reemplaza este bloque por: <img src="/instructor.jpg" alt="Jeffrey A. Guzman" /> -->
+    <div class="photo-placeholder" role="img" aria-label={instructor.photoLabel}>
+      <svg viewBox="0 0 24 24" width="46" height="46" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+      <span>{instructor.photoLabel}</span>
+    </div>
+    <ul class="langs">
+      {instructor.languages.map((l) => <li>{l}</li>)}
+    </ul>
+  </div>
+
+  <div class="instructor__body">
+    <span class="kicker">{instructor.kicker}</span>
+    <h2>{instructor.name}</h2>
+    <p class="instructor__role">{instructor.role}</p>
+    {instructor.bio.map((p) => <p>{p}</p>)}
+
+    <h3 class="cred-title">{instructor.credTitle}</h3>
+    <ul class="creds">
+      {
+        instructor.credentials.map((c) => (
+          <li>
+            <span class="creds__dot" aria-hidden="true"></span>
+            {c}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<style>
+  .instructor {
+    margin-top: 84px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    align-items: start;
+  }
+
+  .instructor__media {
+    position: sticky;
+    top: 24px;
+  }
+
+  .photo-placeholder {
+    aspect-ratio: 4 / 5;
+    border-radius: 22px;
+    border: 2px dashed rgba(10, 28, 68, 0.22);
+    background:
+      radial-gradient(600px 200px at 50% 0%, rgba(232, 163, 23, 0.1), transparent 70%),
+      #eef2f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--navy);
+    text-align: center;
+    padding: 24px;
+  }
+
+  .photo-placeholder span {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .langs {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 18px 0 0;
+    padding: 0;
+  }
+
+  .langs li {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--navy);
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+  }
+
+  .instructor__body h2 {
+    font-size: clamp(1.7rem, 3vw, 2.2rem);
+    margin: 8px 0 10px;
+  }
+
+  .instructor__role {
+    color: var(--navy);
+    font-weight: 500;
+    font-size: 1.05rem;
+    margin-bottom: 18px;
+  }
+
+  .cred-title {
+    font-size: 1.05rem;
+    margin: 26px 0 14px;
+  }
+
+  .creds {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  .creds li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+
+  .creds__dot {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    margin-top: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  @media (min-width: 960px) {
+    .instructor {
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 48px;
+    }
+  }
+</style>

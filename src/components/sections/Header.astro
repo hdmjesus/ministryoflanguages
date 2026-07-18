@@ -13,6 +13,13 @@ import Logo from "@/components/ui/Logo.astro";
 
 const lang = toLocale(Astro.currentLocale);
 const t = useTranslations(lang);
+
+// Preserve the current sub-path when switching locale (e.g. /es/about -> /fr/about).
+const segments = Astro.url.pathname.split("/").filter(Boolean);
+const restPath = ((locales as readonly string[]).includes(segments[0])
+  ? segments.slice(1)
+  : segments
+).join("/");
 ---
 
 <header
@@ -21,7 +28,7 @@ const t = useTranslations(lang);
   <Container
     class="flex flex-col gap-3 py-3 md:flex-row md:items-center md:justify-between"
   >
-    <a href="#top" class="flex items-center gap-3">
+    <a href="/#top" class="flex items-center gap-3">
       <Logo class="h-16 w-fit md:h-22.5" />
     </a>
 
@@ -53,7 +60,7 @@ const t = useTranslations(lang);
         >
           {
             locales.map((loc) => (
-              <option value={localePath(loc)} selected={loc === lang}>
+              <option value={localePath(loc) + restPath} selected={loc === lang}>
                 {localeFlags[loc]} {content[loc].localeLabel}
               </option>
             ))
@@ -67,14 +74,17 @@ const t = useTranslations(lang);
           stroke-width="2"
           aria-hidden="true"
         >
-          <path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"
+          ></path>
         </svg>
       </div>
 
       <script is:inline>
-        document.getElementById("lang-select")?.addEventListener("change", (e) => {
-          window.location.href = e.target.value
-        })
+        document
+          .getElementById("lang-select")
+          ?.addEventListener("change", (e) => {
+            window.location.href = e.target.value;
+          });
       </script>
     </div>
   </Container>

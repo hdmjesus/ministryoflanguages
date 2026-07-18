@@ -49,24 +49,28 @@ export const rightIcons: IconName[] = ["lucide:book-open", "lucide:mic", "lucide
 
 /** Anchor ids pair by index with content.about. `key` maps to content.nav. */
 export const navItems = [
-  { key: "about", href: "#about" },
-  { key: "classes", href: "#classes" },
-  { key: "languages", href: "#languages" },
-  { key: "signin", href: "#signin" },
-  { key: "contact", href: "#contact" },
-] as const
+  { key: "about", href: "/about" },
+  { key: "classes", href: "/#classes" },
+  { key: "languages", href: "/#languages" },
+  { key: "signin", href: "/#signin" },
+  { key: "contact", href: "/#contact" },
+] as const;
 
 export const aboutIds = ["about", "where", "hellotalk"] as const
 
-export type LevelKey = "beginner" | "elementary" | "intermediateReading"
+/**
+ * One card per language. Index aligns with content.languageNames
+ * (English, Spanish, Italian, French, Russian, Portuguese, German).
+ * Levels use CEFR codes — international, so no translation needed.
+ */
+export type CourseLanguage = { flag: string; levels: string[] }
 
-export type LanguageClass = { name: string; levelKey: LevelKey; flag: string }
-
-export const classes: LanguageClass[] = [
-  { name: "English A1", levelKey: "beginner", flag: "Aa" },
-  { name: "English A2", levelKey: "elementary", flag: "Aa" },
-  { name: "English B1 Reading", levelKey: "intermediateReading", flag: "Aa" },
-  { name: "French A1", levelKey: "beginner", flag: "Àç" },
-  { name: "Italian A1", levelKey: "beginner", flag: "Aè" },
-  { name: "Portuguese A1", levelKey: "beginner", flag: "Ãõ" },
-]
+export const courseLanguages: CourseLanguage[] = [
+  { flag: "🇬🇧", levels: ["A1", "A2", "B1"] },
+  { flag: "🇪🇸", levels: ["A1"] },
+  { flag: "🇮🇹", levels: ["A1"] },
+  { flag: "🇫🇷", levels: ["A1"] },
+  { flag: "🇷🇺", levels: ["A1"] },
+  { flag: "🇵🇹", levels: ["A1"] },
+  { flag: "🇩🇪", levels: ["A1"] }, // ponytail: default A1, set real levels when known
+];
