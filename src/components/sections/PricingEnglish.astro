@@ -79,7 +79,7 @@ const plans: Plan[] = [
 const otherLanguages = ["Francés", "Italiano", "Portugués"];
 ---
 
-<section class="pricing" aria-labelledby="pricing-title">
+<section class="pricing" aria-labelledby="pricing-title" id="pricing">
   <div class="pricing__inner">
     <header class="pricing__head">
       <span class="pricing__eyebrow">Programas Mensuales</span>
@@ -112,7 +112,9 @@ const otherLanguages = ["Francés", "Italiano", "Portugués"];
 
             <div class="card__meta">
               <span class="card__hours">{plan.hoursLabel}</span>
-              <span class="card__dot" aria-hidden="true">•</span>
+              <span class="card__dot" aria-hidden="true">
+                •
+              </span>
               <span class="card__perhour">{plan.perHour}</span>
             </div>
 
@@ -158,8 +160,8 @@ const otherLanguages = ["Francés", "Italiano", "Portugués"];
       <div class="soon__text">
         <span class="soon__badge">Próximamente</span>
         <p>
-          Los programas de <strong>{otherLanguages.join(", ")}</strong> estarán
-          disponibles muy pronto. Estamos afinando los precios y detalles.
+          Los programas de <strong>{otherLanguages.join(", ")}</strong> estarán disponibles
+          muy pronto. Estamos afinando los precios y detalles.
         </p>
       </div>
       <a class="soon__cta" href="#notificarme">Avísame cuando salgan</a>

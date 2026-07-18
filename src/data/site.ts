@@ -51,6 +51,7 @@ export const rightIcons: IconName[] = ["lucide:book-open", "lucide:mic", "lucide
 export const navItems = [
   { key: "about", href: "/about" },
   { key: "classes", href: "/#classes" },
+  { key: "pricing", href: "/#pricing" },
   { key: "languages", href: "/#languages" },
   { key: "signin", href: "/#signin" },
   { key: "contact", href: "/#contact" },

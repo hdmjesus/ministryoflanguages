@@ -25,6 +25,7 @@ export type ContentShape = {
     languages: string;
     signin: string;
     contact: string;
+    pricing: string;
   };
   leftInfo: { title: string; text: string }[];
   rightInfo: { title: string; text: string }[];
@@ -113,6 +114,7 @@ export const content: Record<Locale, ContentShape> = {
     nav: {
       about: "About Us",
       classes: "Our Classes",
+      pricing: "Pricing",
       languages: "The Languages",
       signin: "Sign-In",
       contact: "Contact Us",
@@ -167,7 +169,15 @@ export const content: Record<Locale, ContentShape> = {
       elementary: "Elementary",
       intermediateReading: "Intermediate · Reading",
     },
-    languageNames: ["English", "Spanish", "Italian", "French", "Russian", "Portuguese", "German"],
+    languageNames: [
+      "English",
+      "Spanish",
+      "Italian",
+      "French",
+      "Russian",
+      "Portuguese",
+      "German",
+    ],
     signin: {
       eyebrow: "Sign-In",
       title: "Reserve your seat in the next group",
@@ -381,7 +391,15 @@ export const content: Record<Locale, ContentShape> = {
       elementary: "Elemental",
       intermediateReading: "Intermedio · Lectura",
     },
-    languageNames: ["Inglés", "Español", "Italiano", "Francés", "Ruso", "Portugués", "Alemán"],
+    languageNames: [
+      "Inglés",
+      "Español",
+      "Italiano",
+      "Francés",
+      "Ruso",
+      "Portugués",
+      "Alemán",
+    ],
     signin: {
       eyebrow: "Inscripción",
       title: "Reserva tu plaza en el próximo grupo",
@@ -594,7 +612,15 @@ export const content: Record<Locale, ContentShape> = {
       elementary: "Elementare",
       intermediateReading: "Intermedio · Lettura",
     },
-    languageNames: ["Inglese", "Spagnolo", "Italiano", "Francese", "Russo", "Portoghese", "Tedesco"],
+    languageNames: [
+      "Inglese",
+      "Spagnolo",
+      "Italiano",
+      "Francese",
+      "Russo",
+      "Portoghese",
+      "Tedesco",
+    ],
     signin: {
       eyebrow: "Iscrizione",
       title: "Prenota il tuo posto nel prossimo gruppo",
@@ -809,7 +835,15 @@ export const content: Record<Locale, ContentShape> = {
       elementary: "Élémentaire",
       intermediateReading: "Intermédiaire · Lecture",
     },
-    languageNames: ["Anglais", "Espagnol", "Italien", "Français", "Russe", "Portugais", "Allemand"],
+    languageNames: [
+      "Anglais",
+      "Espagnol",
+      "Italien",
+      "Français",
+      "Russe",
+      "Portugais",
+      "Allemand",
+    ],
     signin: {
       eyebrow: "Inscription",
       title: "Réservez votre place dans le prochain groupe",
@@ -1024,7 +1058,15 @@ export const content: Record<Locale, ContentShape> = {
       elementary: "Элементарный",
       intermediateReading: "Средний · Чтение",
     },
-    languageNames: ["Английский", "Испанский", "Итальянский", "Французский", "Русский", "Португальский", "Немецкий"],
+    languageNames: [
+      "Английский",
+      "Испанский",
+      "Итальянский",
+      "Французский",
+      "Русский",
+      "Португальский",
+      "Немецкий",
+    ],
     signin: {
       eyebrow: "Запись",
       title: "Забронируйте место в следующей группе",
@@ -1238,7 +1280,15 @@ export const content: Record<Locale, ContentShape> = {
       elementary: "Elementar",
       intermediateReading: "Intermediário · Leitura",
     },
-    languageNames: ["Inglês", "Espanhol", "Italiano", "Francês", "Russo", "Português", "Alemão"],
+    languageNames: [
+      "Inglês",
+      "Espanhol",
+      "Italiano",
+      "Francês",
+      "Russo",
+      "Português",
+      "Alemão",
+    ],
     signin: {
       eyebrow: "Inscrição",
       title: "Reserve sua vaga no próximo grupo",
@@ -1452,7 +1502,15 @@ export const content: Record<Locale, ContentShape> = {
       elementary: "Grundstufe",
       intermediateReading: "Mittelstufe · Lesen",
     },
-    languageNames: ["Englisch", "Spanisch", "Italienisch", "Französisch", "Russisch", "Portugiesisch", "Deutsch"],
+    languageNames: [
+      "Englisch",
+      "Spanisch",
+      "Italienisch",
+      "Französisch",
+      "Russisch",
+      "Portugiesisch",
+      "Deutsch",
+    ],
     signin: {
       eyebrow: "Anmeldung",
       title: "Sichern Sie sich Ihren Platz in der nächsten Gruppe",
